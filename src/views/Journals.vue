@@ -116,7 +116,7 @@
             headers: [
                 {text: "Journal name", value: "journal_name"},
                 {text: "Toll-access usage", value: "displayClosedAccessDownloads"},
-                {text: "Usage", value: "displayDownloads"},
+                {text: "2018 Usage", value: "displayDownloads"},
                 {text: "MIT citations", value: "num_citations"},
                 // {text: "Affected DOIs", value: "num_dois"},
                 {text: "Any OA (%)", value: "proportion_oa"},
