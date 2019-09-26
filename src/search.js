@@ -125,16 +125,19 @@ export const articleSearch = {
         page: new UserInputInt(1),
         q: new UserInputString("")
     },
-    baseUrl: "https://api.cdl.metrics.unpaywall.org/articles",
+    baseUrl: "https://rickscafe-api.herokuapp.com/articles",
 
 
     // this is for if you are doing filtering on the server, so you are making
     // a new API call to reflect the current state of the search params.
     getApiUrl: function () {
         let params = this.getParams(true)
-        console.log("using these params to create search URL", params)
+
+        // hack to hardcode this to MIT
+        params.package = "mit_elsevier"
+
         let queryObj = new URLSearchParams
-        let paramsStr = Object.entries(params)
+        Object.entries(params)
             .forEach(([paramName, paramVal]) => {
                 queryObj.append(paramName, paramVal)
             })
@@ -144,7 +147,9 @@ export const articleSearch = {
             .replace("isOa=false", "oa_host=none")
             .replace("isOa=true", "oa_host=any")
 
-        return [this.baseUrl, queryStr].join("?")
+        const ret =  [this.baseUrl, queryStr].join("?")
+        console.log("API url", ret)
+        return ret
     },
 
     reset(){
