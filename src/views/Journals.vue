@@ -169,7 +169,7 @@
                         const makeHiMedLowStrForSorting = function(apiStr){
                             const config = {
                                 high: "3 (high)",
-                                medium: "2 (medium)",
+                                medium: "2 (med)",
                                 low: "1 (low)",
                             }
                             if (!config[apiStr]){
