@@ -158,7 +158,7 @@
         },
         methods: {
             fetch() {
-                let url = "https://api.cdl.metrics.unpaywall.org/breakdown?bigdeal=cdl_elsevier"
+                let url = "https://rickscafe-api.herokuapp.com/breakdown?package=mit_elsevier"
                 return axios.get(url)
                     .then(resp => {
                         this.articleBreakdown = resp.data.article_breakdown

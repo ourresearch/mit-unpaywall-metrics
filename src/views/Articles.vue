@@ -200,9 +200,13 @@
             searchUrl() {
 
                 let host = "none"
-                if (this.oaOnly) host = "any"
+                if (this.oaOnly) host = "any";
+                let base
+                // base ="https://api.cdl.metrics.unpaywall.org/articles?"
 
-                return "https://api.cdl.metrics.unpaywall.org/articles?q={q}&oa_host={host}&page={page}"
+                base = "https://rickscafe-api.herokuapp.com/articles?package=mit_elsevier&"
+
+                return base + "q={q}&oa_host={host}&page={page}"
                     .replace("{q}", this.search)
                     .replace("{host}", host)
                     .replace("{page}", this.resultsPage)

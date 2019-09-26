@@ -77,9 +77,10 @@
                             </span>
 
                     </td>
-                    <td>{{ props.item.affected_start_date }}</td>
-                    <td>{{ props.item.affected_end_date }}</td>
-                    <td class="text-xs-right">{{ props.item.num_dois }}</td>
+                    <td>{{ props.item.displayClosedAccessDownloads }}</td>
+                    <td>{{ props.item.displayDownloads }}</td>
+<!--                    <td class="text-xs-right">{{ parseInt(props.item.num_dois) }}</td>-->
+                    <td class="text-xs-right">{{ props.item.num_citations }}</td>
                     <td class="text-xs-right">{{ parseInt(props.item.proportion_oa * 100) }}%</td>
                     <td class="text-xs-right">{{ parseInt(props.item.proportion_publisher_hosted * 100)}}%</td>
                     <td class="text-xs-right">{{ parseInt(props.item.proportion_repository_hosted * 100)}}%</td>
@@ -114,9 +115,10 @@
             search: '',
             headers: [
                 {text: "Journal name", value: "journal_name"},
-                {text: "Affected start", value: "affected_start_date"},
-                {text: "Affected end", value: "affected_end_date"},
-                {text: "Affected DOIs", value: "num_dois"},
+                {text: "Toll-access usage", value: "displayClosedAccessDownloads"},
+                {text: "Usage", value: "displayDownloads"},
+                {text: "MIT citations", value: "num_citations"},
+                // {text: "Affected DOIs", value: "num_dois"},
                 {text: "Any OA (%)", value: "proportion_oa"},
                 {text: "Publisher OA (%)", value: "proportion_publisher_hosted"},
                 {text: "Repository OA (%)", value: "proportion_repository_hosted"}
@@ -143,10 +145,10 @@
         },
         methods: {
             getCsv() {
-                window.location.href = "https://api.cdl.metrics.unpaywall.org/subscriptions.csv"
+                window.location.href = "https://rickscafe-api.herokuapp.com/subscriptions.csv?package=mit_elsevier"
             },
             getJson() {
-                window.location.href = "https://api.cdl.metrics.unpaywall.org/subscriptions?bigdeal=cdl_elsevier"
+                window.location.href = "https://rickscafe-api.herokuapp.com/subscriptions?package=mit_elsevier"
             },
             showArticles(issn){
                 this.$router.push({
@@ -161,14 +163,31 @@
                 return false
             },
             fetch() {
-                 let url = "https://api.cdl.metrics.unpaywall.org/subscriptions?bigdeal=cdl_elsevier"
-                // let url = "http://localhost:5003/subscriptions?bigdeal=cdl_elsevier"
+                 let url = "https://rickscafe-api.herokuapp.com/subscriptions?package=mit_elsevier"
                 return axios.get(url)
                     .then(resp => {
+                        const makeHiMedLowStrForSorting = function(apiStr){
+                            const config = {
+                                high: "3 (high)",
+                                medium: "2 (medium)",
+                                low: "1 (low)",
+                            }
+                            if (!config[apiStr]){
+                                return "0 (no data)"
+                            }
+                            else {
+                                return config[apiStr]
+                            }
 
-                        // use the nifty spread operator since push() requires multiple args
-                        // rather than a single array https://stackoverflow.com/a/1374131/226013
-                        this.rawResults = resp.data.list
+                        }
+
+                        let displayResp = resp.data.list.map(journal=>{
+                            journal.displayDownloads = makeHiMedLowStrForSorting(journal.downloads)
+                            journal.displayClosedAccessDownloads = makeHiMedLowStrForSorting(journal.closed_access_downloads)
+                            return journal
+                        })
+
+                        this.rawResults = displayResp
                         return true
                     })
                     .catch(e => {
