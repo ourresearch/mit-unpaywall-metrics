@@ -1,7 +1,7 @@
 <template>
     <v-flex>
         <v-layout row align-baseline>
-            <h1>Affected articles</h1>
+            <h1>Article Status</h1>
             <v-spacer></v-spacer>
             <v-menu offset-y>
                 <template v-slot:activator="{ on }">
@@ -20,8 +20,9 @@
                     </v-list-tile>
                 </v-list>
             </v-menu>
-
-
+        </v-layout>
+        <v-layout>
+            This page helps you find the status of and article, and where Open Access copies (if any) can be found.
         </v-layout>
         <v-layout row>
             <v-flex xs12>

@@ -9,7 +9,7 @@
                         <v-card-title primary-title>
                             <div>
                                 <h3 class="headline mb-0">About this website</h3>
-                                <div> MIT is currently in subscription negotiations with Elsevier. This website provides information about the Elsevier journals under discussion, including percentages of content available as open access. The data sets provided through this site are both searchable and downloadable.
+                                <div> MIT is currently in subscription negotiations with Elsevier. This website provides information about the Elsevier journals under discussion, including percentages of Elsevier content available as open access. This depicts only future issues, usage of perpetual-access backfile content is not included. The data sets provided through this site are both searchable and downloadable.
 
                                 </div>
                             </div>
@@ -113,19 +113,19 @@
             bars(){
                 return {
                     repository: {
-                        name: "Fulltext in a repository",
+                        name: "Open Access in a repository",
                         percent: 100 * this.articleBreakdown.num_has_repository_hosted_and_not_publisher_hosted / this.numArticles
                     },
                     both: {
-                        name: "Fulltext at publisher and in repository",
+                        name: "Open Access at publisher and in repository",
                         percent: 100 * this.articleBreakdown.num_has_repository_hosted_and_has_publisher_hosted / this.numArticles
                     },
                     publisher: {
-                        name: "Fulltext at publisher",
+                        name: "Open Access at publisher",
                         percent: 100 * this.articleBreakdown.num_not_repository_hosted_and_has_publisher_hosted / this.numArticles
                     },
                     closed: {
-                        name: "No fulltext found",
+                        name: "No Open Access found",
                         percent: 100 * this.articleBreakdown.num_closed / this.numArticles
                     },
 

@@ -115,11 +115,11 @@
             search: '',
             headers: [
                 {text: "Journal name", value: "journal_name"},
-                {text: "Toll-access usage", value: "displayClosedAccessDownloads"},
+                {text: "Subscribed views", value: "displayClosedAccessDownloads"},
                 {text: "2018 Usage", value: "displayDownloads"},
-                {text: "MIT citations", value: "num_citations"},
+                {text: "Citations by MIT authors", value: "num_citations"},
                 // {text: "Affected DOIs", value: "num_dois"},
-                {text: "Any OA (%)", value: "proportion_oa"},
+                {text: "%OA", value: "proportion_oa"},
                 {text: "Publisher OA (%)", value: "proportion_publisher_hosted"},
                 {text: "Repository OA (%)", value: "proportion_repository_hosted"}
             ],
