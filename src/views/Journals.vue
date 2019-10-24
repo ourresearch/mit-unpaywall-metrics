@@ -173,7 +173,7 @@
                                 low: "low",
                             }
                             if (!config[apiStr]){
-                                return "<NA>"
+                                return "<no data>"
                             }
                             else {
                                 return config[apiStr]
