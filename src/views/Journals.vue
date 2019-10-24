@@ -168,12 +168,12 @@
                     .then(resp => {
                         const makeHiMedLowStrForSorting = function(apiStr){
                             const config = {
-                                high: "3 (high)",
-                                medium: "2 (med)",
-                                low: "1 (low)",
+                                high: "high",
+                                medium: "med",
+                                low: "low",
                             }
                             if (!config[apiStr]){
-                                return "0 (no data)"
+                                return "<NA>"
                             }
                             else {
                                 return config[apiStr]
